@@ -1,1 +1,3 @@
 venv/
+mission1/.pytest_cache
+mission1/test/__pycache__
