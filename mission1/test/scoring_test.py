@@ -18,4 +18,4 @@ from attendance import input2
     ("Daisy","tuesday",1),
 ])
 def test_scoring(name, attendance_weekday, expected_output):
-    assert input2 == expected_output
+    assert input2(name, attendance_weekday) == expected_output

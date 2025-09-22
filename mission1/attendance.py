@@ -49,6 +49,7 @@ def input2(w, wk):
 
     dat[id2][index] += 1
     points[id2] += add_point
+    return add_point
 
 def input_file():
     try:
