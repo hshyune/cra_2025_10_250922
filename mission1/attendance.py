@@ -67,6 +67,9 @@ def get_score(attended_weekday: str):
     elif attended_weekday == "sunday":
         index = SUNDAY
         score = 2
+    else:
+        index = -1
+        score = 0
     return index, score
 
 
@@ -111,9 +114,12 @@ def insert_player_data(name, attendance_weekday):
 
     # scoring and grading
     index, score = get_score(attendance_weekday)
-    player = players.get(name)
-    player["attended"][index] += score
-    player["score"] += score
+    try:
+        player = players.get(name)
+        player["attended"][index] += score
+        player["score"] += score
+    except IndexError as ie:
+        pass
 
     return score
 
