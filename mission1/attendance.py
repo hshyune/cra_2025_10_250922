@@ -13,8 +13,24 @@ SILVER = "Silver"
 NORMAL = "Normal"
 
 players = {}
-player_index = {}
-
+# player
+"""
+{
+    "Tina": {
+        "number" : 16,
+        "attended" : [],
+        "score": 24,
+        "grade": "Normal"
+    },
+    "Will": {
+        "number" : 17,
+        "attended" : [],
+        "score": 46,
+        "grade": "Silver"
+    },
+    ...
+}
+"""
 
 def get_player_number():
     # get player number from 1
@@ -24,6 +40,10 @@ def get_player_number():
 
 
 def get_score(attended_weekday: str):
+    # get score by weekday
+    ## wednesday 3
+    ## weekend: saturday, sunday 2
+    ## others 1
     index = 0
     score = 0
     if attended_weekday == "monday":
@@ -51,11 +71,13 @@ def get_score(attended_weekday: str):
 
 
 def get_grade(player: dict):
-    # bonus
+    # grading players by score
+    ## if player attended weekend and Wednesday more than or equal 10 days, player can receive bonus score. 
     if player["attended"][WEDNESDAY] >= 10:
         player["score"] += 10
     if (player["attended"][SATURDAY] + player["attended"][SUNDAY]) >= 10:
         player["score"] += 10
+        
     # define grade
     score = player["score"]
     if score >= 50:
@@ -86,7 +108,6 @@ def insert_player_data(name, attendance_weekday):
             "score": 0,
             "grade": None,
         }
-        player_index[player_number] = name
 
     # scoring and grading
     index, score = get_score(attendance_weekday)
@@ -117,7 +138,6 @@ def input_file():
         print("\nRemoved player")
         print("==============")
         for name, player in players.items():
-            print(player)
             if is_falling(player):
                 print(name)
 
